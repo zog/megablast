@@ -23,7 +23,7 @@
 
     .player-template.player
       .name{data: {attribute: "name"}}
-      .state{data: {attribute: "state"}}
+      .state{data: {attribute: "state", sameclass: true}}
       .health{data: {attribute: "health"}}
       .ships
         .template.ship
@@ -32,6 +32,7 @@
           .health{data: {attribute: "health"}}
           .weapons{data: {attribute: "weapons"}}
 
+    %script{:src => "./assets/logger.js"}
     %script{:src => "./assets/store.js"}
     %script{:src => "./assets/megablast-client.js"}
     %script{:src => "./assets/megablast-server.js"}

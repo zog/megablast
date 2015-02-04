@@ -41,7 +41,12 @@ class window.MegablastPlayer
 
     div.find("[data-attribute]").each (i, item) =>
       item = $(item)
-      item.html @[item.data("attribute")]?()
+      val = @[item.data("attribute")]?()
+      item.html val
+      if item.attr("data-sameclass")?
+        item.removeClass item.attr "data-sameclass"
+        item.addClass val
+        item.attr "data-sameclass", val
 
     div.appendTo @blast.container
     @container = div
@@ -85,6 +90,8 @@ class window.MegablastClient
       @sendToServer 'clientConnection', @clientIdx
 
     @connection.onmessage = (message) =>
+      Logger.log message.data
+
       [kind, meth, args...] = message.data.split("|")
       return if kind == "server"
       if kind == "player"
@@ -104,9 +111,10 @@ class window.MegablastClient
     txt = "server|#{message}|#{params.join('|')}"
     @connection.send(txt)
 
-  hereIsYourIndex: (idx, gameId)=>
+  hereIsYourIndex: (idx, gameId, state)=>
     @idx = parseInt idx
     @gameId = gameId
+    @state = state
     @save()
     unless @state == "ready"
       @container.find('.name-form').show()
@@ -119,24 +127,15 @@ class window.MegablastClient
         @save()
 
   setPlayers: (players...)=>
-    console.log "setPlayers"
-    console.log @players
-    console.log players
     for player in players
-      console.log player
       @addPlayer(player) unless @players[player.idx]?
 
   addPlayer: (data)=>
-    console.log "addPlayer"
-    console.log data
     newPlayer = new MegablastPlayer(data)
     @players[data.idx] = newPlayer
     newPlayer.draw(@)
 
   updatePlayer: (playerData)=>
-    console.log "updatePlayer"
-    console.log playerData
-    console.log @players
 
     player = @players[playerData.idx]
     player.data = playerData

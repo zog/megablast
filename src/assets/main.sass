@@ -1,9 +1,13 @@
+$blue: #1b3a60
+$green: green
+$orange: orange
+
 body
-  width: 100%
+  // width: 100%
   // height: 100%
   margin: 0
   // overflow: hidden
-  background-color: #1b3a60
+  background-color: $blue
   color: white
   padding: 30px
   font-family: Helvetica, Arial
@@ -14,12 +18,28 @@ body
 .player
   padding: 10px
   overflow: hidden
+  position: relative
   &.me
     border: 1px solid white
   .name
     font-size: 1.2em
     font-weight: bold
     line-height: 2em
+    display: inline-block
+  .state
+    display: inline-block
+    font-size: 0.8em
+    color: $blue
+    background-color: white
+    border-radius: 3px
+    padding: 3px 6px
+    vertical-align: text-bottom
+    margin-left: 10px
+    &.ready
+      background-color: $green
+      color: white
+    &.preparing
+      background-color: $orange
   .ships
     margin-top: 20px
     .template

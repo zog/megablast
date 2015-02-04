@@ -99,7 +99,9 @@ class window.MegablastServer
 
   clientConnection: (id) =>
     playerIdx = @clientIndexToGameIndex[id]
-    unless playerIdx?
+    if playerIdx?
+      player = @players[playerIdx]
+    else
       @playersCount += 1
       playerIdx = @playersCount
       @clientIndexToGameIndex[id] = playerIdx
@@ -109,9 +111,8 @@ class window.MegablastServer
       @players[playerIdx] = player
       @save()
 
-    console.log "clientConnection"
-    console.log @playersList()
-    @sendToPlayer playerIdx, 'hereIsYourIndex', playerIdx, @serverGameId
+
+    @sendToPlayer playerIdx, 'hereIsYourIndex', playerIdx, @serverGameId, player.state
     @sendToPlayers 'setPlayers', @playersList()...
 
   imReady: (id, name)=>
@@ -119,8 +120,6 @@ class window.MegablastServer
     player.name = name
     player.state = "ready"
     @save()
-    console.log "imReady"
-    console.log player
     @sendToPlayers 'updatePlayer', player
 
   initDeck: =>
