@@ -1,0 +1,38 @@
+!!!
+%html
+  %head
+    %title MegaBLAST !
+    %script{:src => "./assets/main.js"}
+    %script{:src => "http://localhost:35729/livereload.js"}
+    %link{:href => "./assets/main.css", :media => "all", :rel => "stylesheet", :type => "text/css"}/
+  %body
+    %h1 MegaBLAST
+    .debug
+      %a.kill{href: '#'} Kill game
+      %a.reload{href: '#'} reload
+    .menu
+      %a.server{href: '#'} Create Game
+      %a.client{href: '#'} Join Game
+    .steps
+      %a.next-step.step-0{data: {"server-action" => "sendShips"}} Start Game
+
+    .name-form
+      %label{for: "name"} Player name:
+      %input{name: 'name', type: 'text'}
+      %a.imready{href: '#'} I'm Ready
+
+    .player-template.player
+      .name{data: {attribute: "name"}}
+      .state{data: {attribute: "state"}}
+      .health{data: {attribute: "health"}}
+      .ships
+        .template.ship
+          .name{data: {attribute: "name"}}
+          .type{data: {attribute: "type"}}
+          .health{data: {attribute: "health"}}
+          .weapons{data: {attribute: "weapons"}}
+
+    %script{:src => "./assets/store.js"}
+    %script{:src => "./assets/megablast-client.js"}
+    %script{:src => "./assets/megablast-server.js"}
+    %script{:src => "./assets/megablast.js"}

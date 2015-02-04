@@ -1,0 +1,32 @@
+[
+  {
+    "type": "scout",
+    "name": "pipo",
+    "health": 2,
+    "weapons": ["L"]
+  },
+  {
+    "type": "scout",
+    "name": "foo",
+    "health": 2,
+    "weapons": ["L"]
+  },
+  {
+    "type": "scout",
+    "name": "bar",
+    "health": 2,
+    "weapons": ["L"]
+  },
+  {
+    "type": "scout",
+    "name": "baz",
+    "health": 2,
+    "weapons": ["L"]
+  },
+  {
+    "type": "destroyer",
+    "name": "death star",
+    "health": 12,
+    "weapons": ["AP"]
+  }
+]
